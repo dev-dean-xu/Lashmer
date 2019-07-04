@@ -1,0 +1,47 @@
+<div class="content-top">
+	<button type="button" class="btn btn-info" routerLink="/employees/new">Register New User</button>
+</div>
+<form class="form-group form-inline">
+	<div>
+		<span class="h5">Search: </span><input class="form-control" type="text" [formControl]="filterControl"/>
+	</div>
+</form>
+<div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Account Name</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Role</th>
+				<th>Promotion Codes</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let employee of filteredEmployees">
+				<td>
+					<ngb-highlight [result]="employee.userName" [term]="filterControl.value"></ngb-highlight>
+				</td>
+				<td>
+					<ngb-highlight [result]="employee.fullName" [term]="filterControl.value"></ngb-highlight>
+				</td>
+				<td>
+					<ngb-highlight [result]="employee.email" [term]="filterControl.value"></ngb-highlight>
+				</td>
+				<td>
+					<ngb-highlight [result]="employee.role" [term]="filterControl.value"></ngb-highlight>
+				</td>
+				<td>
+					<ngb-highlight [result]="employee.coupons" [term]="filterControl.value"></ngb-highlight>
+				</td>
+				<td>
+					<div class="btn-group">
+						<button class="btn btn-primary" routerLink="/employees/details/{{employee.id}}">Edit</button>
+						<button class="btn btn-danger" disabled>Delete</button>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+
+span.ngb-highlight {
+	background-color: yellow;
+}
+
+.content-top {
+	padding-bottom: 20px;
+}
+
+.table-row-odd {
+	background-color: white;
+}
+
+.table-row-even {
+	background-color: aliceblue;
+}
+
+
+.ng-valid[required], .ng-valid.required  {
+	border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+	border-left: 5px solid #a94442; /* red */
+}

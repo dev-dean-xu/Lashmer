@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-Lashmer_Admin-2ED7715F-1775-45B3-90DF-E24030BEFAFA</UserSecretsId>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\**" />
+    <Compile Remove="Logs\**" />
+    <Content Remove="Areas\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Areas\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Areas\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\EmployeeController.cs" />
+    <Compile Remove="Controllers\OrderController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\employees\employees.routing.ts" />
+    <None Remove="ClientApp\src\app\orders\orders.routing.ts" />
+    <None Remove="ClientApp\src\app\shared\models\auth_token.ts" />
+    <None Remove="ClientApp\src\app\shared\services\base.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="12.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" PrivateAssets="All" />
+    <PackageReference Include="Serilog" Version="2.8.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.2" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\shared\utils\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\employees\employees.routing.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\orders\orders.routing.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\models\auth_token.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\services\base.service.ts" />
+  </ItemGroup>
+
+</Project>

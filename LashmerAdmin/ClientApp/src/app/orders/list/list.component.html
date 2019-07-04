@@ -1,0 +1,93 @@
+<div class="content-top">
+	<button type="button" class="btn btn-info" routerLink="/orders/upload" >Upload Orders</button>
+</div>
+<form class="form-group form-inline">
+	<div>
+		<span class="h5">Search: </span><input class="form-control" type="text" [formControl] ="filterControl" />
+	</div>
+</form>
+<div class="order_table">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Order Number</th>
+				<th>Customer Name</th>
+				<th>Phone Number</th>
+				<th>Email</th>
+				<th>Product</th>
+				<th>Descprition</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Shipping</th>
+				<th>Total</th>
+				<th>Payment</th>
+				<th>Fulfillment</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<ng-container *ngFor="let order of filteredOrders | async; let i = index">
+				<tr [ngClass]="{'table-row-odd': i%2 != 0, 'table-row-even': i%2 == 0}">
+					<td [attr.rowspan]="order.items.length">
+						<ngb-highlight [result]="order.orderId" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td [attr.rowspan]="order.items.length">
+						<ngb-highlight [result]="order.customerName" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td [attr.rowspan]="order.items.length">
+						<ngb-highlight [result]="order.phoneNumber" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td [attr.rowspan]="order.items.length">
+						<ngb-highlight [result]="order.email" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td>
+						<ngb-highlight [result]="order.items[0].productName" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td>
+						<ngb-highlight [result]="order.items[0].productOptionDescription" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td>
+						<ngb-highlight [result]="order.items[0].qty" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td>
+						<ngb-highlight [result]="order.items[0].price" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td [attr.rowspan]="order.items.length">
+						<ngb-highlight [result]="order.shipping" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td [attr.rowspan]="order.items.length">
+						<ngb-highlight [result]="order.total | number" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td [attr.rowspan]="order.items.length">
+						{{order.payment}}
+						<!--<ngb-highlight [result]="order.payment" [term]="filterControl.value"></ngb-highlight>-->
+					</td>
+					<td [attr.rowspan]="order.items.length">
+						{{order.fulfillment}}
+						<!--<ngb-highlight [result]="order.fulfillment" [term]="filterControl.value"></ngb-highlight>-->
+					</td>
+					<td>
+						<button class="btn btn-primary" routerLink="/orders/details/{{order.orderId}}">Details</button>
+					</td>
+				</tr>
+				<tr *ngFor="let product of order.items | slice:1 " [ngClass]="{'table-row-odd': i%2 != 0, 'table-row-even': i%2 == 0}">
+					<td>
+						<ngb-highlight [result]="product.productName" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td>
+						<ngb-highlight [result]="product.productOptionDescription" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td>
+						<ngb-highlight [result]="product.qty" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td>
+						<ngb-highlight [result]="product.price" [term]="filterControl.value"></ngb-highlight>
+					</td>
+					<td>
+						<button class="btn btn-primary" routerLink="/orders/details/{{order.orderId}}">Details</button>
+					</td>
+				</tr>
+			</ng-container>
+		</tbody>
+	</table>
+</div>

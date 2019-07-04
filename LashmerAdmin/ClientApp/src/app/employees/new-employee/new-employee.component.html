@@ -1,0 +1,96 @@
+<div class="content-top">
+	<button type="button" class="btn btn-info" routerLink="/employees">Back to list</button>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h2>Please enter new employee's information</h2>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<form #regForm="ngForm" (ngSubmit)="onSubmit()">
+			<div class="cross-validation" [class.cross-validation-error]="regForm.errors?.identityRevealed && (regForm.touched || regForm.dirty)">
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input id="email" type="text" name="email" class="form-control" placeholder="Email" [(ngModel)]="newEmployee.email" #email="ngModel" required email>
+					<div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+						<div *ngIf="email.errors.required">
+							Email is required.
+						</div>
+						<div *ngIf="email.errors.email">
+							Please enter a valid email.
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="userName">User Name</label>
+					<input type="text" class="form-control" id="userName" placeholder="User Name" name="userName" [(ngModel)]="newEmployee.userName" #userName="ngModel" required maxlength="60">
+					<div *ngIf="userName.invalid && (userName.dirty || userName.touched)" class="alert alert-danger">
+						<div *ngIf="userName.errors.required">
+							User name is required.
+						</div>
+						<div *ngIf="userName.errors.maxlength">
+							User name must be less than 60 characters.
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="fullName">Full Name</label>
+					<input type="text" class="form-control" id="fullName" placeholder="Full Name" name="fullName" [(ngModel)]="newEmployee.fullName" #fullName="ngModel" required maxlength="256">
+					<div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="alert alert-danger">
+						<div *ngIf="fullName.errors.required">
+							Full name is required.
+						</div>
+						<div *ngIf="fullName.errors.maxlength">
+							Full name must be less than 256 characters.
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" id="password" name="password" placeholder="Password" [(ngModel)]="newEmployee.password" #password="ngModel" required minlength="6" maxlength="100" validateEqual="confirmPassword" reverse="true">
+					<div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+						<div *ngIf="password.errors.required">
+							Password is required.
+						</div>
+						<div *ngIf="password.errors.minlength">
+							Password must be at least 6 characters.
+						</div>
+						<div *ngIf="password.errors.maxlength">
+							Password must be less than 100 characters.
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="confirmPassword">Confirm Password</label>
+					<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" [(ngModel)]="newEmployee.confirmPassword" required validateEqual="password" #confirmPassword="ngModel">
+					<div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert alert-danger">
+						Confirm password is not equal to password.
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="role">Role</label>
+					<select class="form-control" [(ngModel)]="newEmployee.role" id="role" name="role" required #role="ngModel">
+						<option *ngFor="let role of roles" [value]="role">{{role}}</option>
+					</select>
+					<div *ngIf="role.errors && role.touched" class="alert alert-danger">
+						<div *ngIf="role.errors.required">
+							User role is required.
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary" [disabled]="regForm.invalid || isRequesting">Register</button>
+				</div>
+				<div *ngIf="errors" class="alert alert-danger" role="alert">
+					<div *ngFor="let error of errors">
+						<strong>{{error}}</strong> 
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+

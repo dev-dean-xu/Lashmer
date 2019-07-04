@@ -1,0 +1,34 @@
+<button type="button" class="btn btn-primary btn-manage pull-right" (click)="openModal(promotionCodeModal)">Manage Promotion Codes</button>
+
+<ng-template #promotionCodeModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Promotion Codes</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<div class="form-group">
+			<label>Promotion Code:
+				<input #newCode />
+			</label>
+			<!-- (click) passes input value to add() and then clears the input -->
+			<button (click)="onAddNewPromotionCode(newCode.value); newCode.value=''">
+				Add
+			</button>
+		</div>
+
+		<ul class="codes">
+			<li *ngFor="let pcode of promotionCodeList;let i = index">
+				<a>
+					<span class="badge">{{i + 1}}</span> {{pcode}}
+				</a>
+				<button class="delete" title="delete hero"
+				        (click)="onDeletePromotionCode(i,pcode)">x</button>
+			</li>
+		</ul>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close()" ngbAutofocus>Close</button>
+	</div>
+</ng-template>

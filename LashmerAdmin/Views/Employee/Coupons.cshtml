@@ -1,0 +1,32 @@
+﻿@model IEnumerable<LashmerAdmin.Models.DataModels.UserCoupon>
+
+@{
+    ViewData["Title"] = "Coupons";
+}
+
+<h2>Coupons</h2>
+
+<p>
+    <a asp-action="AddCoupon">Add</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Coupon</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Coupon)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new {/* id=item.PrimaryKey */}) |*@
+            @Html.ActionLink("Delete", "DeleteCoupon", new {/* id=item.PrimaryKey */})
+        </td>
+    </tr>
+}
+    </tbody>
+</table>
